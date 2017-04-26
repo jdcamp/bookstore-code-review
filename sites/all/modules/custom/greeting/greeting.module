@@ -1,0 +1,50 @@
+<?php
+function greeting_menu() {
+    $items = array();
+    $items['hello_friend'] = array(
+        'title' => 'Hello Friend!',
+        'page callback' => 'say_hello',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items['farewell'] = array(
+        'title' => 'Farewell Friend!',
+        'page callback' => 'say_farewell',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items['welcome_new_user'] = array(
+        'title' => 'Thanks for joining our community',
+        'page callback' => 'new_user',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    return $items;
+}
+function say_hello() {
+    return '<p>Hello my dear friend!</p>';
+}
+function say_farewell() {
+    return '<p>Fare thee well my dear friend!</p>';
+}
+function new_user() {
+    return '<p>Thanks for createing a new account!</p>';
+}
+function greeting_user_login(){
+    $_GET['destination'] = 'hello_friend';
+}
+function greeting_user_logout(){
+    $_GET['destination'] = 'farewell';
+}
+function greeting_user_insert(){
+    $_GET['destination'] = 'new_user';
+}
+
+function greeting_help($path, $arg) {
+    switch ($path) {
+        case 'admin/help#greeting':
+  return '<p>' . t('Blocks are boxes of content rendered into an area, or region, of a web page. The default theme Bartik, for example, implements the regions "Sidebar first", "Sidebar second", "Featured", "Content", "Header", "Footer", etc., and a block may appear in any one of these areas. The <a href="@blocks">blocks administration page</a> provides a drag-and-drop interface for assigning a block to a region, and for controlling the order of blocks within regions.', array('@blocks' => url('admin/structure/greeting'))) . '</p>';
+
+    }
+
+}
